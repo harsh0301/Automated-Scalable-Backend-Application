@@ -6,7 +6,7 @@ const PORT=5000;
 
 app.use(bodyParser.json());
 
-app.get('/',(req,res)=>{
+app.get('/healthz',(req,res)=>{
     console.log('[test]');
 
     res.send('http.StatusOk');
