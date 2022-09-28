@@ -14,3 +14,9 @@ npm install --save express
 # Have installed Nodemon so that server restart after every changes
 npm install --save-dev nodemon
 add in package.json -- in scripts -- "start":"nodemon index.js"
+
+#To start the Web
+npm start
+
+#To check the working
+curl -v http://localhost:5000
