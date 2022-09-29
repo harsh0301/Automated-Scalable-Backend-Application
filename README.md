@@ -15,8 +15,8 @@ npm install --save express
 npm install --save-dev nodemon
 add in package.json -- in scripts -- "start":"nodemon index.js"
 
-#To start the Web
+# To start the Web
 npm start
 
-#To check the working
-curl -v http://localhost:5000
+# To check the working
+curl -v http://localhost:5000/healthz

@@ -7,10 +7,7 @@ const PORT=5000;
 app.use(bodyParser.json());
 
 app.get('/healthz',(req,res)=>{
-    console.log('[test]');
-
-    res.send('http.StatusOk');
-
+    res.send(' ');
 });
 
 app.listen(PORT, () => console.log(`SERVER RUNNING ON PORT: http://localhost:${PORT}`) );
