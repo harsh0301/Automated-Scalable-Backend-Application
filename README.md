@@ -21,7 +21,8 @@ npm start
 # To check the working
 curl -v http://localhost:5000/healthz
 
-
 added the test file npm test to run
 
 Installed bcrypt moment basic-auth files for updation and validation
+
+
