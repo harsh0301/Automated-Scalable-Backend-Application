@@ -71,7 +71,6 @@ router.post('/v1/account',async(req,res)=>{
 	var pass = decoded.split(':')[1];
 
     db.query(`SELECT * FROM user1 WHERE id = '${req.params.id}'`, async(err,row)=>{
-        //console.log(row[0].password)
         if((name == row[0].username) && (await bcrypt.compare(pass,row[0].password))){
             //if (await bcrypt.compare(pass,row[0].password)){
             let sql=`select id,first_name,last_name,username,acc_created,acc_update from user1 where id = '${req.params.id}'`;
@@ -84,7 +83,7 @@ router.post('/v1/account',async(req,res)=>{
         }
         //}
         else{
-            return res.status(400).send("http bad request");
+            return res.status(400).send(" ");
         }
     })
  });
@@ -108,7 +107,7 @@ router.put('/v1/account/:id', async(req,res)=>{
     var acc_update = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
 
     router.use(bodyParser.json()); // imp to take care for conditioning the data coming from json
-        //console.log(req.body);
+        
 
         db.query(`SELECT * FROM user1 WHERE id = '${req.params.id}'`, async(err,row)=>{
         var acc_created=row[0].acc_created;
@@ -117,12 +116,12 @@ router.put('/v1/account/:id', async(req,res)=>{
             let data=[first_name,last_name,password,acc_update,];
         let query=db.query(sql,data,(err,result) => {
         if(err){
-            return res.status(400).send("http bad request");
+            return res.status(400).send(" ");
         } 
         res.send({first_name,last_name,name,acc_created,acc_update}); //sending the values
         });
          }else{
-        return res.status(400).send("http bad request");
+        return res.status(400).send(" ");
         }   
     });
  });
