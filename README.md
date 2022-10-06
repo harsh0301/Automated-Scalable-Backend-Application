@@ -20,3 +20,5 @@ npm start
 
 # To check the working
 curl -v http://localhost:5000/healthz
+
+Added the db file for sql connection
