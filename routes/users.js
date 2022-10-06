@@ -1,17 +1,15 @@
 import express from 'express';
 import {v4 as uuidv4} from 'uuid';
 import db from '../db.js';
-import auth from './basicauth.js'
 
 import bcrypt from 'bcrypt';
 import moment from 'moment';
-import basicauth from './basicauth.js';
 import bodyParser from 'body-parser'; 
 
  const router = express.Router();
 
 //adding new account
-router.post('/vi/account',async(req,res)=>{
+router.post('/v1/account',async(req,res)=>{
     //generating uuid... npm i uuidv4
     const id = uuidv4();
 
@@ -30,22 +28,24 @@ router.post('/vi/account',async(req,res)=>{
 
     const username= req.body.username;
 
-    function isEmail(username) {
+    function isEmail(email) {
         var emailFormat = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
         if (email !== '' && email.match(emailFormat)) { return true; }
-        
         return false;
     }
 
     //db.query(`select * from user1 where username=?`,[username],(err,rows)=>{})
-
+    if(isEmail(username)){
     db.query('INSERT into user1 values(?,?,?,?,?,?,?)',[id,first_name,last_name,password,username,acc_create,acc_update],(err,result)=>{
         if(err){
             return res.status(400).send("Email already exists");
         }else{
-            res.send("value added")
+            res.send({id,first_name,last_name,username,acc_create,acc_update});
         }
     })
+    }else{
+        return res.status(400).send("Invalid Email");
+    }
 });
 
 
@@ -62,7 +62,7 @@ router.post('/vi/account',async(req,res)=>{
 //  });
 
 
- router.get('/vi/account/:id', (req,res)=>{
+ router.get('/v1/account/:id', (req,res)=>{
 
     var encoded = req.headers.authorization.split(' ')[1];
 	// decode it using base64
@@ -84,18 +84,19 @@ router.post('/vi/account',async(req,res)=>{
         }
         //}
         else{
-            return res.status(401).send("http bad request");
+            return res.status(400).send("http bad request");
         }
     })
  });
 
-router.put('/vi/account/:id', async(req,res)=>{
+router.put('/v1/account/:id', async(req,res)=>{
 
     var encoded = req.headers.authorization.split(' ')[1];
 	// decode it using base64
 	var decoded = new Buffer(encoded,'base64').toString();
-	var name = decoded.split(':')[0];
-	var pass = decoded.split(':')[1];
+	const name = decoded.split(':')[0];
+	const pass = decoded.split(':')[1];
+
 
     const first_name = req.body.first_name;
     const last_name=req.body.last_name;
@@ -110,18 +111,18 @@ router.put('/vi/account/:id', async(req,res)=>{
         //console.log(req.body);
 
         db.query(`SELECT * FROM user1 WHERE id = '${req.params.id}'`, async(err,row)=>{
-        //console.log(row[0].password)
+        var acc_created=row[0].acc_created;
         if((name == row[0].username) && (await bcrypt.compare(pass,row[0].password) && !req.body['username'])){
             let sql=`UPDATE user1 SET first_name=?, last_name=?, password=?, acc_update=? where id ='${req.params.id}'`;
-            let data=[first_name,last_name,password,acc_update];
+            let data=[first_name,last_name,password,acc_update,];
         let query=db.query(sql,data,(err,result) => {
         if(err){
-            return res.status(401).send("Hi.... http bad request");
+            return res.status(400).send("http bad request");
         } 
-        res.send(result);
+        res.send({first_name,last_name,name,acc_created,acc_update}); //sending the values
         });
          }else{
-        return res.status(401).send("Hellooo... http bad request");
+        return res.status(400).send("http bad request");
         }   
     });
  });

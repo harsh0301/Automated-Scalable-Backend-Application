@@ -12,10 +12,9 @@ app.use(bodyParser.json());
 app.use('/', usersRoutes); 
 
 app.get('/healthz',(req,res)=>{
-    console.log('[test]');
-
-    res.send('http.StatusOk');
-
+    res.json({"error" : false, "message" : "Hello !"});
 });
 
 app.listen(PORT, () => console.log(`SERVER RUNNING ON PORT: http://localhost:${PORT}`) );
+
+export default app;

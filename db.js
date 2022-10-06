@@ -15,7 +15,7 @@ connection.connect((err) => {
    var sql = "CREATE TABLE user1 (id VARCHAR(255) NOT NULL, first_name VARCHAR(255), last_name VARCHAR(255), password VARCHAR(255), username VARCHAR(255), acc_created VARCHAR(255), acc_updated VARCHAR(255))";
    connection.query(sql, function (err, result) {
         if (err) {
-          console.log(err);
+          //console.log(err);
         }
         console.log("New table created");
       });
