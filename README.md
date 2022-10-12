@@ -25,5 +25,5 @@ added the test file npm test to run
 
 Installed bcrypt moment basic-auth files for updation and validation.
 
-test db
+test db1
 
