@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 app.use('/', usersRoutes); 
 
 app.get('/healthz',(req,res)=>{
-    res.json({"error" : false, "message" : "Hello !"});
+    res.status(200).send()
 });
 
 app.listen(PORT, () => console.log(`SERVER RUNNING ON PORT: http://localhost:${PORT}`) );
