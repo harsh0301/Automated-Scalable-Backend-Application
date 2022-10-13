@@ -5,9 +5,6 @@ import usersRoutes from './routes/users.js';
 //import db from './db.js';
 
 const app=express();
-const PORT=5000;
-
-app.use(bodyParser.json());
 
 app.use('/', usersRoutes); 
 
@@ -15,6 +12,8 @@ app.get('/healthz',(req,res)=>{
     res.status(200).send()
 });
 
-app.listen(PORT, () => console.log(`SERVER RUNNING ON PORT: http://localhost:${PORT}`) );
+var server= app.listen(8000,function(){
+    console.log("server is listening at port 8000")
+})
 
 export default app;

@@ -3,7 +3,6 @@ chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 var expect = chai.expect;
 
-
 describe('Account', () => {
   it("test1", () => {
     chai.request('http://localhost:8000')
