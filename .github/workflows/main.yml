@@ -37,12 +37,10 @@ jobs:
         # uses: hashicorp-contrib/setup-packer@b9dd0b644cd73b8fe7ae5e96f6387015d25401ca
         uses: hashicorp-contrib/setup-packer@v1.0.0
 
-      - name: Run packer commands
-        run: |
-          packer init .
-          packer fmt .
-          packer validate .
-          packer build .
+      - name: Build image from template
+        working-directory: ${{ github.workspace }}
+        run: zip webapp.zip ./* && ls -a && packer init ami.pkr.hcl && packer ami.pkr.hcl
         env:
-          AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+            AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+

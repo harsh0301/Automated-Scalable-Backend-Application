@@ -17,7 +17,7 @@ app.use('/v1/account', router)
 
 
 app.get('/healthz',(req,res)=>{
-    res.status(200)
+    res.status(200).send("API HEALTH IS GOOD")
 });
 
 
