@@ -25,7 +25,7 @@ added the test file npm test to run
 
 Installed bcrypt moment basic-auth files for updation and validation.
 
-check packer and orm and ami build
+check packer and orm and ami build from main
 
 
 
