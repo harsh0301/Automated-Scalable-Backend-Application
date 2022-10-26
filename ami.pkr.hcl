@@ -38,7 +38,6 @@ source "amazon-ebs" "my-ami" {
   ]
   ami_regions = [
     "us-east-1",
-  ]
 
   aws_polling {
     delay_seconds = 10
