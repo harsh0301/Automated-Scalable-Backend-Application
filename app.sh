@@ -15,11 +15,8 @@ sudo apt-get install mysql -y
 sudo apt-get install -y nodejs
 sudo apt-get install -y gcc g++ make
 
-cd ~/ && unzip webapp.zip
+cd ~/ && unzip webapp.zip -d webapp
 cd ~/webapp && npm i
-
-sudo npm i pm2
-sudo npm i -g pm2
 sudo pm2 start server.js
 sudo pm2 startup systemd
 
