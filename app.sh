@@ -20,16 +20,11 @@ cd ~/webapp && npm i
 sudo pm2 start server.js
 sudo pm2 startup systemd
 
-sudo npm i pm2
-sudo npm i -g pm2
-sudo pm2 start server.js
-sudo pm2 startup systemd
-
-
 mkdir /tmp/ssm
 cd /tmp/ssm
 wget https://s3.us-east-1.amazonaws.com/amazon-ssm-us-east-1/latest/debian_amd64/amazon-ssm-agent.deb
-sudo dpkg -i amazon-ssm-agent.deb
+sudo apt install amazon-cloudwatch-agent -y
+sudo dpkg -i amazon-ssm-agent.deb 
 sudo systemctl start snap.amazon-ssm-agent.amazon-ssm-agent.service
 sudo snap start amazon-ssm-agent
 sudo systemctl status amazon-ssm-agent
