@@ -7,6 +7,12 @@ const { uuid } = require('uuidv4');
 const bcrypt = require('bcrypt');
 const moment= require('moment');
 const emailValidator = require("email-validator");
+const statsd = require("statsd");
+const winston = require('winston');
+
+const logger = winston.createLogger({
+  level: 'info',
+});
 
 // create main Model
 const Product = db.products
@@ -17,6 +23,7 @@ const Product = db.products
 // 1. create product
 
 const addProduct = async (req, res) => {
+  logger.info('Add a user');
     if (
       !req.body.username ||
       !req.body.first_name ||
