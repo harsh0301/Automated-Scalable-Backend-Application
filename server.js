@@ -3,6 +3,9 @@ const app = express();
 const db = require("./models");
 const router = require('./routes/productRouter.js');
 const logger=require("./config/logger")
+const SDC = require('statsd-client')
+
+const sdc = new SDC({host: dbConfig.METRICS_HOSTNAME, port: dbConfig.METRICS_PORT});
 require('dotenv').config();
 
 
@@ -16,6 +19,7 @@ db.sequelize.sync()
 // Health Check endpoint - returns 200 HTTP status code
 app.get('/healthz', (req,res) => {
     logger.info("check healthz");
+    sdc.increment("endpoint.checkheatlhz");
     res.status(200).send();
 })
 

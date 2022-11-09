@@ -10,5 +10,9 @@ module.exports = {
         max: 5,
         min: 0,
         idle: 10000
-      }
+      },
+
+      METRICS_HOSTNAME:"localhost",
+      METRICS_PORT:8125
+
 };

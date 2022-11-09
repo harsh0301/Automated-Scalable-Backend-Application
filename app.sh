@@ -17,7 +17,7 @@ sudo apt-get install -y gcc g++ make
 
 sudo npm i pm2
 sudo npm i -g pm2
-cd ~/ && unzip webapp.zip -d webapp
+cd ~/ && unzip webapp.zip
 cd ~/webapp && npm i
 
 wget https://s3.us-east-1.amazonaws.com/amazoncloudwatch-agent-us-east-1/ubuntu/amd64/latest/amazon-cloudwatch-agent.deb

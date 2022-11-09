@@ -7,6 +7,7 @@ const db = require("../models");
 const User = db.users;
 const Picture = db.picture;
 const bcrypt = require("bcrypt");
+const logger=require("./config/logger")
 
 const BUCKET = process.env.AWS_BUCKET;
 
