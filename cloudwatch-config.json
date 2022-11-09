@@ -8,7 +8,7 @@
     "logs_collected": {
       "files": {
         "collect_list": [{
-          "file_path": "/home/ec2-user/webapp/logs/combined.log",
+          "file_path": "/home/ubuntu/webapp/logs/combined.log",
           "log_group_name": "csye6225_fall2022",
           "log_stream_name": "webapp"
         }]

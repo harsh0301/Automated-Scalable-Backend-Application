@@ -8,6 +8,7 @@ const bcrypt = require('bcrypt');
 const moment= require('moment');
 const emailValidator = require("email-validator");
 const winston = require('winston');
+const logger=require("./config/logger");
 
 const logger = winston.createLogger({
   level: 'info',
