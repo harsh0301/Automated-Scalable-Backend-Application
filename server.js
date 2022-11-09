@@ -2,7 +2,10 @@ const express = require('express');
 const app = express();
 const db = require("./models");
 const router = require('./routes/productRouter.js');
+const logger=require("./config/logger")
 require('dotenv').config();
+
+
 
 // Syncing the DB using Sequelize
 db.sequelize.sync()
@@ -12,6 +15,7 @@ db.sequelize.sync()
 
 // Health Check endpoint - returns 200 HTTP status code
 app.get('/healthz', (req,res) => {
+    logger.info("check healthz");
     res.status(200).send();
 })
 
