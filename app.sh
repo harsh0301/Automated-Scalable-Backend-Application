@@ -23,10 +23,11 @@ sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl \
 
 sudo apt-get install -y nodejs
 sudo apt-get install -y gcc g++ make
-cd ~/ && unzip webapp.zip
-cd ~/webapp && npm i
+
 sudo npm i pm2
 sudo npm i -g pm2
+cd ~/ && unzip webapp.zip
+cd ~/webapp && npm i
 sudo pm2 start server.js
 sudo pm2 startup systemd
 

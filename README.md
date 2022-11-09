@@ -27,5 +27,9 @@ Installed bcrypt moment basic-auth files for updation and validation.
 
 check packer and orm and ami build from main
 
+<<<<<<< HEAD
 ......
+=======
+...
+>>>>>>> 5ecd030e8d3e682f098b4473d08fd8186270d215
 
