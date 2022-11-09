@@ -12,19 +12,24 @@ curl --silent --location https://deb.nodesource.com/setup_16.x  | sudo bash -
 
 sudo apt-get install mysql -y
 
+wget https://s3.us-east-1.amazonaws.com/amazoncloudwatch-agent-us-east-1/ubuntu/amd64/latest/amazon-cloudwatch-agent.deb
+#install it
+sudo dpkg -i -E ./amazon-cloudwatch-agent.deb
+sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl \
+    -a fetch-config \
+    -m ec2 \
+    -c file:/home/ec2-user/webapp/cloudwatch-config.json \
+    -s
+
 sudo apt-get install -y nodejs
 sudo apt-get install -y gcc g++ make
 
+
+sudo npm i pm2
+sudo npm i -g pm2
 cd ~/ && unzip webapp.zip -d webapp
 cd ~/webapp && npm i
 sudo pm2 start server.js
 sudo pm2 startup systemd
 
-mkdir /tmp/ssm
-cd /tmp/ssm
-wget https://s3.us-east-1.amazonaws.com/amazon-ssm-us-east-1/latest/debian_amd64/amazon-ssm-agent.deb
-sudo apt install amazon-cloudwatch-agent -y
-sudo dpkg -i amazon-ssm-agent.deb 
-sudo systemctl start snap.amazon-ssm-agent.amazon-ssm-agent.service
-sudo snap start amazon-ssm-agent
-sudo systemctl status amazon-ssm-agent
+
