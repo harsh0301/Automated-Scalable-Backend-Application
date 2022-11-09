@@ -26,7 +26,7 @@ sudo apt-get install -y gcc g++ make
 
 sudo npm i pm2
 sudo npm i -g pm2
-cd ~/ && unzip webapp.zip
+cd ~/ && unzip webapp.zip -d webapp
 cd ~/webapp && npm i
 sudo pm2 start server.js
 sudo pm2 startup systemd
