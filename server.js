@@ -6,6 +6,7 @@ const logger=require("./config/logger")
 const SDC = require('statsd-client')
 
 const sdc = new SDC({host:"localhost", port:8125});
+var start= new Date();
 require('dotenv').config();
 
 
@@ -20,6 +21,7 @@ db.sequelize.sync()
 app.get('/healthz', (req,res) => {
     logger.info("check healthz");
     sdc.increment("endpoint.checkheatlhz");
+    sdc.timing("healthz.checking_time",start);
     res.status(200).send();
 })
 
