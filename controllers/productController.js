@@ -8,12 +8,11 @@ const bcrypt = require('bcrypt');
 const moment= require('moment');
 const emailValidator = require("email-validator");
 const winston = require('winston');
-const logger=require("./config/logger");
+const logger=require("../config/logger")
+const SDC = require('statsd-client')
 
-const logger = winston.createLogger({
-  level: 'info',
-});
 
+const sdc = new SDC({host:"localhost", port:8125});
 // create main Model
 const Product = db.products
 
@@ -24,6 +23,7 @@ const Product = db.products
 
 const addProduct = async (req, res) => {
   logger.info('Add a user');
+  sdc.increment("endpoint.Add_user");
     if (
       !req.body.username ||
       !req.body.first_name ||
@@ -79,7 +79,8 @@ const addProduct = async (req, res) => {
 //get single product
 
 const getOneProduct = async (req, res) => {
-    console.log(db);
+    logger.info("retrieving the user details");
+    sdc.increment("endpoint.Getting_userdetails");
     if (req.headers.authorization === undefined) {
       res.status(403).send();
     } else {
@@ -120,6 +121,8 @@ const getOneProduct = async (req, res) => {
 // 4. update Product
 
 const updateacc = async (req, res) => {
+  logger.info("Updating the user details");
+  sdc.increment("endpoint.updating_userdetails");
     if (req.body.id || req.body.account_created || req.body.account_updated) {
       res.status(400).send();
     } else {

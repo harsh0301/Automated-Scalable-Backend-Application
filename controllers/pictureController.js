@@ -7,7 +7,12 @@ const db = require("../models");
 const User = db.users;
 const Picture = db.picture;
 const bcrypt = require("bcrypt");
-const logger=require("./config/logger")
+
+const logger=require("../config/logger")
+const SDC = require('statsd-client')
+
+const sdc = new SDC({host:"localhost", port:8125});
+
 
 const BUCKET = process.env.AWS_BUCKET;
 
@@ -34,6 +39,8 @@ const s3 = new aws.S3({
 //Adding/Updating user profile pic
 //Create Picture
 const create_document = async (req, res) => {
+  logger.info("Adding the document to s3");
+  sdc.increment("endpoint.Add_document");
   if (req.headers.authorization === undefined) {
     res.status(403).send();
   }
@@ -128,7 +135,8 @@ const create_document = async (req, res) => {
 
 //Get Picture
 const getdocuments = async (req, res) => {
-
+  logger.info("Getting all the document from s3");
+  sdc.increment("endpoint.Getting_document");
     if (req.headers.authorization === undefined) {
         res.status(403).send();
       }
@@ -184,6 +192,8 @@ const getdocuments = async (req, res) => {
 
   //Get Picture
 const get_single_document = async (req, res) => {
+  logger.info("Getting a single document from S3");
+  sdc.increment("endpoint.Add_Single_document");
   let id = req.params.id
   console.log(id);
   if (req.headers.authorization === undefined) {
@@ -253,6 +263,8 @@ const get_single_document = async (req, res) => {
 
 //Delete Picture
 const delete_single_document = async (req, res) => {
+  logger.info("Deleting the Document from S3");
+  sdc.increment("endpoint.Delete_document");
   let id = req.params.id
     if (req.headers.authorization === undefined) {
         res.status(403).send();
