@@ -5,7 +5,7 @@ const router = require('./routes/productRouter.js');
 const logger=require("./config/logger")
 const SDC = require('statsd-client')
 
-const sdc = new SDC({host: dbConfig.METRICS_HOSTNAME, port: dbConfig.METRICS_PORT});
+const sdc = new SDC({host:"localhost", port:8125});
 require('dotenv').config();
 
 
