@@ -22,7 +22,6 @@ cd ~/webapp && npm i
 sudo pm2 start server.js
 sudo pm2 startup systemd
 
-
 wget https://s3.us-east-1.amazonaws.com/amazoncloudwatch-agent-us-east-1/ubuntu/amd64/latest/amazon-cloudwatch-agent.deb
 #install it
 sudo dpkg -i -E ./amazon-cloudwatch-agent.deb
