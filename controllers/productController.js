@@ -117,7 +117,7 @@ const addProduct = async (req, res) => {
 
                   Message: JSON.stringify(msg),
                   Subject: randomnanoID,
-                  TopicArn: 'arn:aws:sns:us-east-1:680057889162:verify_email'
+                  TopicArn: 'arn:aws:sns:us-east-1:359745020237:verify_email'
 
               }
               var publishTextPromise = await sns.publish(params).promise();
