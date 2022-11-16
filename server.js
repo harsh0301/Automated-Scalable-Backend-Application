@@ -2,8 +2,8 @@ const express = require('express');
 const app = express();
 const db = require("./models");
 const router = require('./routes/productRouter.js');
-const logger=require("./config/logger")
-const SDC = require('statsd-client')
+const logger=require("./config/logger");
+const SDC = require('statsd-client');
 
 const sdc = new SDC({host:"localhost", port:8125});
 var start= new Date();
