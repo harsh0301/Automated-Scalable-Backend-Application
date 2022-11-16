@@ -13,9 +13,11 @@ const winston = require('winston');
 const logger=require("../config/logger")
 const SDC = require('statsd-client')
 
+
 const sdc = new SDC({host:"localhost", port:8125});
 // create main Model
 const Product = db.products;
+
 
 const AWS = require('aws-sdk');
 AWS.config.update({
@@ -26,6 +28,8 @@ var dynamoDatabase = new AWS.DynamoDB({
     apiVersion: '2012-08-10',
     region: process.env.AWS_REGION || 'us-east-1'
 });
+
+
 
 
 
@@ -117,8 +121,8 @@ const addProduct = async (req, res) => {
 
                   Message: JSON.stringify(msg),
                   Subject: randomnanoID,
-                  TopicArn: 'arn:aws:sns:us-east-1:359745020237:verify_email'
 
+                  TopicArn: 'arn:aws:sns:us-east-1:359745020237:verify_email'
               }
               var publishTextPromise = await sns.publish(params).promise();
 
