@@ -17,6 +17,10 @@ router.get('/account/:id', productController.getOneProduct)
 
 router.put('/account/:id', productController.updateacc);
 
+// Verify User
+router.get("/account/verifyUserEmail", productController.verifyUser);
+
+
 
 router.post("/document", pictureController.create_document);
 
