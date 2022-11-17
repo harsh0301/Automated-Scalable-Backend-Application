@@ -18,7 +18,7 @@ router.get('/account/:id', productController.getOneProduct);
 router.put('/account/:id', productController.updateacc);
 
 // Verify User
-router.get("/verifyUserEmail", productController.verifyUser);
+router.get("/verifyUser/", productController.verifyUser);
 
 
 

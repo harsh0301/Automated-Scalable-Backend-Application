@@ -55,7 +55,7 @@ const create_document = async (req, res) => {
       where: { username: username },
     })
       .then((user) => {
-        if (user) {
+        if (user && user.isVerified === true) {
           //Check if passwords are same
           const isPasswordCorrect = bcrypt.compareSync(password, user.password);
           if (isPasswordCorrect) {
@@ -150,7 +150,7 @@ const getdocuments = async (req, res) => {
         where: { username: username },
       })
         .then((user) => {
-          if (user) {
+          if (user && user.isVerified === true) {
             //Check if passwords are same
             const isPasswordCorrect = bcrypt.compareSync(
               password,
@@ -209,7 +209,7 @@ const get_single_document = async (req, res) => {
       where: { username: username },
     })
       .then((user) => {
-        if (user) {
+        if (user && user.isVerified === true) {
           //Check if passwords are same
           const isPasswordCorrect = bcrypt.compareSync(
             password,
@@ -279,7 +279,7 @@ const delete_single_document = async (req, res) => {
         where: { username: username },
       })
         .then((user) => {
-          if (user) {
+          if (user && user.isVerified === true) {
             //Check if passwords are same
             const isPasswordCorrect = bcrypt.compareSync(
               password,
