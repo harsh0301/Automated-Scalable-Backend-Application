@@ -12,13 +12,14 @@ const router = require('express').Router()
 router.post('/account', productController.addProduct)
 
 // Products router
-router.get('/account/:id', productController.getOneProduct)
+router.get('/account/:id', productController.getOneProduct);
 
 
 router.put('/account/:id', productController.updateacc);
 
 // Verify User
-router.get("/account/verifyUserEmail", productController.verifyUser);
+router.get("/verifyUserEmail", productController.verifyUser);
+
 
 
 
@@ -32,4 +33,4 @@ router.delete("/document/:id", pictureController.delete_single_document);
 
 
 
-module.exports = router
+module.exports = router;
