@@ -33,7 +33,7 @@ var dynamoDatabase = new AWS.DynamoDB({
 
 // 1. create product
 
-const addProduct = async (req, res) => {
+const addProduct = async (req, res, next) => {
   logger.info('Add a user');
   sdc.increment("endpoint.Add_user");
   var hash = await bcrypt.hash(req.body.password, 10);
@@ -246,7 +246,6 @@ const updateacc = async (req, res) => {
 
   
 async function getUserByUsername(username) {
-
   return User.findOne({
       where: {
           username: username
