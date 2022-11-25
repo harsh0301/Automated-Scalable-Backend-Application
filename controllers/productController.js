@@ -179,62 +179,63 @@ const getOneProduct = async (req, res) => {
 
 // 4. update Product
 
+//Updating user account
 const updateacc = async (req, res) => {
-  logger.info("Updating the user details");
-  sdc.increment("endpoint.updating_userdetails");
-    if (req.body.id || req.body.account_created || req.body.account_updated) {
+  logger.info("checking endpoint update user account");
+  sdc.increment("endpoint.userAccount");
+  if (req.body.id || req.body.account_created || req.body.account_updated) {
+    res.status(400).send();
+  } else {
+    if (
+      !req.body.username ||
+      !req.body.first_name ||
+      !req.body.last_name ||
+      !req.body.password
+    ) {
       res.status(400).send();
     } else {
-      if (
-        !req.body.username ||
-        !req.body.first_name ||
-        !req.body.last_name ||
-        !req.body.password
-      ) {
-        res.status(400).send();
+      if (req.headers.authorization === undefined) {
+        res.status(403).send();
       } else {
-        if (req.headers.authorization === undefined) {
-          res.status(403).send();
-        } else {
-          //grab the encoded value, format: bearer <Token>, need to extract only <token>
-          var encoded = req.headers.authorization.split(" ")[1];
-          // decode it using base64
-          var decoded = new Buffer(encoded, "base64").toString();
-          var username = decoded.split(":")[0];
-          var password = decoded.split(":")[1];
-  
-          const salt = await bcrypt.genSalt(10);
-          const hashPassword = await bcrypt.hash(req.body.password, salt);
-          // check if the passed username and password match with the values in our database.\
-  
-          const findUser = await User.findOne({
-            where: { username: username },
-          });
-          if (findUser !== null) {
-            if (!req.body.first_name || !req.body.last_name || !req.body.password) {
-              res.status(400).send();
-            } else {
-              if ((await bcrypt.compare(password, findUser.password) && findUser.isVerified === true)) {
-                if (passValidator.validate(`${req.body.password}`)) {
-                  findUser.update({
-                    first_name: `${req.body.first_name}`,
-                    last_name: `${req.body.last_name}`,
-                    password: hashPassword,
-                  });
-                  res.status(204).send();
-                } else {
-                  res.status(400).send();
-                }
-              }
-              res.status(401).send();
-            }
-          } else {
+        //grab the encoded value, format: bearer <Token>, need to extract only <token>
+        var encoded = req.headers.authorization.split(" ")[1];
+        var decoded = new Buffer(encoded, "base64").toString();
+        var username = decoded.split(":")[0];
+        var password = decoded.split(":")[1];
+
+        const salt = await bcrypt.genSalt(10);
+        const hashPassword = await bcrypt.hash(req.body.password, salt);
+        
+        const findUserAccount = await User.findOne({
+          where: { username: username },
+        });
+        console.log(findUserAccount);
+        if (findUserAccount !== null && findUserAccount.isVerified == true ) {
+          if (!req.body.first_name || !req.body.last_name || !req.body.password) {
             res.status(400).send();
+          } else {
+            if (await bcrypt.compare(password, findUserAccount.password)) {
+              if (`${req.body.password}`) {
+                findUserAccount.update({
+                  first_name: `${req.body.first_name}`,
+                  last_name: `${req.body.last_name}`,
+                  password: hashPassword,
+                });
+                res.status(204).send();
+              } else {
+                res.status(400).send();
+
+              }
+            }
+            res.status(401).send();
           }
+        } else {
+          res.status(400).send();
         }
       }
     }
-  };
+  }
+};
 
   
 async function getUserByUsername(username) {
