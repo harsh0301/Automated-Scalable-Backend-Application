@@ -186,6 +186,7 @@ const updateacc = async (req, res) => {
       res.status(400).send();
     } else {
       if (
+        !req.body.username ||
         !req.body.first_name ||
         !req.body.last_name ||
         !req.body.password
