@@ -20,9 +20,6 @@ router.put('/account/:id', productController.updateacc);
 // Verify User
 router.get("/verifyUser/", productController.verifyUser);
 
-
-
-
 router.post("/document", pictureController.create_document);
 
 router.get("/documents", pictureController.getdocuments);
