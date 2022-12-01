@@ -69,7 +69,7 @@ jobs:
         aws --version
         aws ec2 create-launch-template-version --launch-template-name LaunchTemplate --source-version 1 --launch-template-data "ImageId=$(jq -r '.builds[-1].artifact_id' manifest.json | cut -d ":" -f2)"
         aws autoscaling update-auto-scaling-group --auto-scaling-group-name myVpc-auto-scaling-group --launch-template LaunchTemplateName='LaunchTemplate',Version='$Latest'          
-        aws autoscaling start-instance-refresh --auto-scaling-group-name myVpc-auto-Scaling-Group
+        aws autoscaling start-instance-refresh --auto-scaling-group-name myVpc-auto-scaling-group
       shell: bash
 
    
