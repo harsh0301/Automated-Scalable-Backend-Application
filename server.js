@@ -5,6 +5,7 @@ const router = require('./routes/productRouter.js');
 const logger=require("./config/logger");
 const SDC = require('statsd-client');
 
+
 const sdc = new SDC({host:"localhost", port:8125});
 var start= new Date();
 require('dotenv').config();
@@ -25,7 +26,8 @@ app.get('/healthz', (req,res) => {
     res.status(200).send();
 })
 
-app.get('/healthz', (req,res) => {
+
+app.get('/health', (req,res) => {
     logger.info("check healthz");
     res.status(200).send("updated ami");
 })
