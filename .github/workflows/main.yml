@@ -60,7 +60,6 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY_R }}
         aws-region: ${{ secrets.AWS_REGION }}
 
-    
     - name: AWS CLI
       id: install-aws-cli
       uses: unfor19/install-aws-cli-action@v1.0.4
@@ -71,5 +70,6 @@ jobs:
         aws ec2 create-launch-template-version --launch-template-name LaunchTemplate --source-version 1 --launch-template-data "ImageId=$(jq -r '.builds[-1].artifact_id' manifest.json | cut -d ":" -f2)"
         aws autoscaling update-auto-scaling-group --auto-scaling-group-name myVpc-auto-scaling-group --launch-template LaunchTemplateName='LaunchTemplate',Version='$Latest'          
         aws autoscaling start-instance-refresh --auto-scaling-group-name myVpc-auto-Scaling-Group
-      shell: bash
+      shell: bash
+
    
