@@ -58,6 +58,7 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_R }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY_R }}
+        aws-region: ${{ secrets.AWS_REGION }}
 
     
     - name: AWS CLI
