@@ -25,6 +25,11 @@ app.get('/healthz', (req,res) => {
     res.status(200).send();
 })
 
+app.get('/healthz', (req,res) => {
+    logger.info("check healthz");
+    res.status(200).send("updated ami");
+})
+
 //Middlewear
 app.use(express.json());
 app.use(express.urlencoded({extended: true}))
