@@ -26,6 +26,7 @@ app.get('/healthz', (req,res) => {
     res.status(200).send();
 })
 
+
 app.get('/health', (req,res) => {
     logger.info("check healthz");
     res.status(200).send("updated ami");
