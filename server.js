@@ -18,17 +18,13 @@ db.sequelize.sync()
 ));
 
 // Health Check endpoint - returns 200 HTTP status code
-app.get('/healthz', (req,res) => {
+app.get('/health', (req,res) => {
     logger.info("check healthz");
     sdc.increment("endpoint.checkheatlhz");
     sdc.timing("healthz.checking_time",start);
-    res.status(200).send();
+    res.status(200).send("upated ami");
 })
 
-app.get('/healthz', (req,res) => {
-    logger.info("check healthz");
-    res.status(200).send("updated ami");
-})
 
 //Middlewear
 app.use(express.json());
