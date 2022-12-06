@@ -47,7 +47,7 @@ jobs:
 
     - name: Build image from template
       working-directory: ${{ github.workspace }}
-      run: zip webapp.zip ./* && ls -a && packer init ami.pkr.hcl && packer build ami.pkr.hcl
+      run: zip -r webapp.zip ./* && ls -a && packer init ami.pkr.hcl && packer build ami.pkr.hcl
 
       env: # Grab the AWS environment variables for deployment
         AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY_ID }}
