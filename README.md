@@ -1,31 +1,17 @@
-# # WebApp
+**Node.js Web Application on AWS**
 
+This is a RESTful APIs-based web application built with Node.js that offers user registration and file upload functionalities to an S3 bucket. The stack consists of Node.js, Express.js, PostgreSQL, and AWS services.
 
-This is the Webapp for Cloud Assignment
+**Key Components:**
 
-# To create the initialization
-npm init -y
+1. **Custom AMI with Packer:** EC2 instances are built using custom Amazon Machine Images (AMI) created with Packer. This allows for consistent and efficient instance provisioning.
 
-# To install Express
-npm install --save express
+2. **Network and Resource Setup:** The setup of the network and resource creation is automated using AWS CloudFormation, AWS CLI, and shell scripts. This ensures the infrastructure is defined as code for repeatability and consistency.
 
-# To use import statement module in index.js add "type":"module"
+3. **Auto Scaling with ELB:** Instances are automatically scaled using Elastic Load Balancers (ELB) to handle web traffic efficiently. The ELB distributes incoming traffic across multiple instances to maintain high availability and reliability.
 
-# Have installed Nodemon so that server restart after every changes
-npm install --save-dev nodemon
-add in package.json -- in scripts -- "start":"nodemon index.js"
+4. **Serverless Mail Notifications:** A serverless application using AWS Simple Email Service (SES) and Simple Notification Service (SNS) is implemented to send email notifications to users upon registration. This architecture is cost-effective and scalable.
 
-# To start the Web
-npm start
+5. **Automated Testing:** The application is automatically tested using tools like Mocha or Jest to ensure code quality and functionality.
 
-# To check the working
-curl -v http://localhost:8080/healthz
-
-added the test file npm test to run
-
-Installed bcrypt moment basic-auth files for updation and validation.
-
-check packer and orm and ami build from main.
-
-
-
+6. **Continuous Deployment:** A GitHub workflow is set up to automate the deployment process. Whenever a pull request is merged, the application is automatically deployed to the AWS environment. This promotes a streamlined and efficient development workflow.
